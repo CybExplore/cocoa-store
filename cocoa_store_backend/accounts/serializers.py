@@ -1,10 +1,6 @@
 # serializers.py
 from rest_framework import serializers
 from accounts.models import UserProfile
-<<<<<<< HEAD
-from rest_framework import serializers
-=======
->>>>>>> 4a3366c (Initial commit)
 from django.contrib.auth.models import User  # Ensure you import the correct User model
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,14 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-<<<<<<< HEAD
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserProfile
-        fields = '__all__'
-        
-=======
 class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()  # Embed the UserSerializer to include user details
 
@@ -55,4 +43,3 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
->>>>>>> 4a3366c (Initial commit)

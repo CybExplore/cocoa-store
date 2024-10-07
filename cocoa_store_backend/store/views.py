@@ -1,54 +1,8 @@
-<<<<<<< HEAD
-# store/views.py
-
-from rest_framework import generics
-from .models import Product, Category, Cart, CartItem, Order, OrderItem
-from .serializers import ProductSerializer, CategorySerializer, CartSerializer, OrderSerializer
-from rest_framework.permissions import AllowAny
-
-# Category Views
-class CategoryList(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-# Product Views
-class ProductList(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [AllowAny]  # Allow any user to access this view
-
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [AllowAny]  # Allow any user to access this view
-
-# Cart Views
-class CartList(generics.ListCreateAPIView):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
-
-class CartDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
-
-# Order Views
-class OrderList(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-=======
 from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Product, Cart, CartItem, Order, OrderItem
-from .serializers import ProductSerializer, CartSerializer, OrderSerializer
+from store.models import Product, Cart, CartItem, Order, OrderItem
+from store.serializers import ProductSerializer, CartSerializer, OrderSerializer
 from django.shortcuts import get_object_or_404
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -58,14 +12,14 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # You can add search and filter logic here if needed
-        return Product.objects.all()
+        return super().get_queryset()  # Using the default queryset
 
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def retrieve(self, request):
+    def retrieve(self, request, *args, **kwargs):
         cart = get_object_or_404(Cart, user=request.user)
         serializer = self.get_serializer(cart)
 
@@ -96,11 +50,7 @@ class CartViewSet(viewsets.ModelViewSet):
         cart, _ = Cart.objects.get_or_create(user=user)  # Create cart if it doesn't exist
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
-        if created:
-            cart_item.quantity = quantity
-        else:
-            cart_item.quantity += quantity
-
+        cart_item.quantity += quantity  # Increment quantity
         cart_item.save()
         return Response({"message": "Item added to cart"}, status=status.HTTP_201_CREATED)
 
@@ -171,5 +121,5 @@ class OrderViewSet(viewsets.ModelViewSet):
             order.status = 'canceled'
             order.save()
             return Response({"message": "Order canceled"}, status=status.HTTP_200_OK)
-        return Response({"message": "Order cannot be canceled"}, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> 4a3366c (Initial commit)
+        
+        return Response({"error": "Order cannot be canceled"}, status=status.HTTP_400_BAD_REQUEST)

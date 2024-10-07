@@ -1,30 +1,8 @@
-<<<<<<< HEAD
-# store/models.py
-
-from django.db import models
-from django.utils.text import slugify
-from django.contrib.auth.models import User
-
-class Category(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-
-# store/models.py
-=======
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from decimal import Decimal
 
->>>>>>> 4a3366c (Initial commit)
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -32,11 +10,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
     slug = models.SlugField(unique=True, blank=True)
-<<<<<<< HEAD
-    # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)  # Foreign key to Category
-=======
     image = models.ImageField(upload_to='static/products/', blank=True, null=True)  # Product image field (optional)
->>>>>>> 4a3366c (Initial commit)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -49,17 +23,10 @@ class Product(models.Model):
         return self.name
 
 
-<<<<<<< HEAD
-# store/models.py
-
-=======
->>>>>>> 4a3366c (Initial commit)
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
-<<<<<<< HEAD
-=======
     def __str__(self):
         return f"Cart - {self.user.username}"
 
@@ -72,7 +39,6 @@ class Cart(models.Model):
         return sum(item.quantity for item in self.items.all())
 
 
->>>>>>> 4a3366c (Initial commit)
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -81,10 +47,6 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.product.name} (x{self.quantity})"
 
-<<<<<<< HEAD
-
-# store/models.py
-=======
     # Total price for the cart item
     def get_total_price(self):
         return self.product.price * self.quantity
@@ -104,7 +66,6 @@ class CartItem(models.Model):
         self.product.save()
         super().delete(*args, **kwargs)
 
->>>>>>> 4a3366c (Initial commit)
 
 ORDER_STATUS_CHOICES = [
     ('pending', 'Pending'),
@@ -112,14 +73,6 @@ ORDER_STATUS_CHOICES = [
     ('canceled', 'Canceled'),
 ]
 
-<<<<<<< HEAD
-class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=50, choices=ORDER_STATUS_CHOICES, default='pending')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-=======
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -127,17 +80,10 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     locked = models.BooleanField(default=False)  # Added field to lock the order after confirmation
->>>>>>> 4a3366c (Initial commit)
 
     def __str__(self):
         return f"Order {self.id} - {self.user.username}"
 
-<<<<<<< HEAD
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-=======
     # Total price calculated from the order items
     def get_total_price(self):
         return sum(item.get_total_price() for item in self.items.all())
@@ -159,13 +105,10 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price_at_purchase = models.DecimalField(max_digits=10, decimal_places=2)  # Store the product price at the time of purchase
->>>>>>> 4a3366c (Initial commit)
 
     def __str__(self):
         return f"{self.product.name} (x{self.quantity})"
 
-<<<<<<< HEAD
-=======
     # Total price for the order item
     def get_total_price(self):
         return self.price_at_purchase * self.quantity
@@ -175,4 +118,3 @@ class OrderItem(models.Model):
         if self.pk is None:  # Only set price_at_purchase when the item is first created
             self.price_at_purchase = self.product.price
         super().save(*args, **kwargs)
->>>>>>> 4a3366c (Initial commit)

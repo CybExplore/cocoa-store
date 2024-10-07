@@ -38,11 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-=======
     
     'django_filters',
->>>>>>> 4a3366c (Initial commit)
 
 
     'rest_framework',

@@ -1,16 +1,4 @@
-<<<<<<< HEAD
 # store/admin.py
-
-from django.contrib import admin
-from store.models import Product, Category, Cart, CartItem, Order, OrderItem
-
-admin.site.register(Product)
-admin.site.register(Category)
-admin.site.register(Cart)
-admin.site.register(CartItem)
-admin.site.register(Order)
-admin.site.register(OrderItem)
-=======
 from django.contrib import admin
 from .models import Product, Cart, CartItem, Order, OrderItem
 
@@ -41,4 +29,3 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Order, OrderAdmin)
->>>>>>> 4a3366c (Initial commit)

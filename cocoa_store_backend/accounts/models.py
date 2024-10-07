@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
-<<<<<<< HEAD
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15, blank=True)
     address = models.TextField(blank=True)
@@ -10,7 +9,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-=======
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link to User
     bio = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
@@ -19,7 +17,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username  # or return a full name
->>>>>>> 4a3366c (Initial commit)
 
 # Optional: You can create signals to automatically create or update user profiles
 from django.db.models.signals import post_save
