@@ -1,5 +1,8 @@
+// src/components/admin/ProductManagement.js
+
 import React, { useEffect, useState } from 'react';
 import { addProduct, deleteProduct, getProducts, updateProduct } from '../services/productService';
+import '../styles/ProductManagement.css'; // Import your CSS for styling
 
 const ProductManagement = () => {
     const [products, setProducts] = useState([]);
@@ -8,10 +11,12 @@ const ProductManagement = () => {
         description: '',
         price: '',
         stock: '',
-        image: null
+        image: null,
     });
-    const [imagePreviewUrl, setImagePreviewUrl] = useState(null); // For image preview
+    const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
     const [editProduct, setEditProduct] = useState(null);
+    const [loading, setLoading] = useState(true); // Loading state
+    const [error, setError] = useState(null); // Error state
 
     // Fetch products on component mount
     useEffect(() => {
@@ -20,7 +25,9 @@ const ProductManagement = () => {
                 const productsData = await getProducts();
                 setProducts(productsData);
             } catch (error) {
-                console.error('Error loading products:', error);
+                setError('Error loading products.'); // Set error state
+            } finally {
+                setLoading(false); // Set loading to false when done
             }
         };
 
@@ -30,37 +37,36 @@ const ProductManagement = () => {
     // Reset the form data
     const resetForm = () => {
         setFormData({ name: '', description: '', price: '', stock: '', image: null });
-        setImagePreviewUrl(null); // Reset the image preview
-        setEditProduct(null); // Reset edit state
+        setImagePreviewUrl(null);
+        setEditProduct(null);
     };
 
     // Handle form submission for both Add and Edit
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const form = new FormData();
         form.append('name', formData.name);
         form.append('description', formData.description);
         form.append('price', formData.price);
         form.append('stock', formData.stock);
         if (formData.image) {
-            form.append('image', formData.image); // Add the image file to the form data
+            form.append('image', formData.image);
         }
 
         try {
             if (editProduct) {
-                // If editing, update the product
+                // Update existing product
                 const updatedProduct = await updateProduct(editProduct, form);
-                setProducts(products.map(product => (product.id === editProduct ? updatedProduct : product)));
+                setProducts(products.map((product) => (product.id === editProduct ? updatedProduct : product)));
             } else {
-                // If adding, add a new product
+                // Add new product
                 const addedProduct = await addProduct(form);
                 setProducts([...products, addedProduct]);
             }
 
-            resetForm(); // Reset form after submission
+            resetForm();
         } catch (error) {
-            console.error('Error submitting form:', error);
+            setError('Error submitting form.'); // Set error state
         }
     };
 
@@ -72,18 +78,21 @@ const ProductManagement = () => {
             description: product.description,
             price: product.price || '',
             stock: product.stock || '',
-            image: null // Reset image when editing
+            image: null,
         });
-        setImagePreviewUrl(product.image); // Set existing image URL as the preview
+        setImagePreviewUrl(product.image);
     };
 
-    // Handle deleting a product
+    // Handle deleting a product with confirmation
     const handleDeleteProduct = async (id) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this product?');
+        if (!confirmDelete) return;
+
         try {
             await deleteProduct(id);
-            setProducts(products.filter(product => product.id !== id)); // Remove the deleted product from the list
+            setProducts(products.filter((product) => product.id !== id));
         } catch (error) {
-            console.error('Error deleting product:', error);
+            setError('Error deleting product.'); // Set error state
         }
     };
 
@@ -98,14 +107,21 @@ const ProductManagement = () => {
         const file = e.target.files[0];
         if (file) {
             setFormData({ ...formData, image: file });
-            setImagePreviewUrl(URL.createObjectURL(file)); // Generate image preview URL
+            setImagePreviewUrl(URL.createObjectURL(file));
         }
     };
 
-    return (
-        <div>
-            <h1>Product Management</h1>
+    if (loading) {
+        return <div>Loading products...</div>; // Loading indicator
+    }
 
+    if (error) {
+        return <div style={{ color: 'red' }}>{error}</div>; // Display error message
+    }
+
+    return (
+        <div className="product-management">
+            <h1>Product Management</h1>
             <h2>{editProduct ? 'Edit Product' : 'Add New Product'}</h2>
             <form onSubmit={handleSubmit}>
                 <input

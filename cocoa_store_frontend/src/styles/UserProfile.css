@@ -1,6 +1,6 @@
-/* Checkout.css */
+/* UserProfile.css */
 
-.checkout-page {
+.user-profile {
     padding: 20px;
     max-width: 600px;
     margin: auto;
@@ -9,23 +9,21 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.checkout-form {
+.edit-profile-form {
     display: flex;
     flex-direction: column;
 }
 
-.order-summary {
-    list-style-type: none;
-    padding: 0;
-}
-
-.order-summary li {
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="email"] {
+.edit-profile-form div {
     margin-bottom: 15px;
+}
+
+.edit-profile-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-profile-form input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -45,17 +43,12 @@ button:hover {
     background-color: #4cae4c;
 }
 
-button:disabled {
-    background-color: #ccc; /* Grey out button while loading */
-    cursor: not-allowed;
-}
-
 .error-message {
     color: red;
     margin-top: 15px;
-    text-align: center; /* Center the error message */
 }
 
-.order-success {
-    text-align: center; /* Center success message */
+.success-message {
+    color: green;
+    margin-top: 15px;
 }

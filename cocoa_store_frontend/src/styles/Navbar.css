@@ -1,44 +1,44 @@
-/* src/styles/Navbar.css */
+/* Navbar.css */
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #4a90e2; /* Light blue color for the navbar */
-    color: white;
+.navbar-custom {
+    background-color: #6f4c3e; /* Cocoa brown */
 }
 
-.logo {
-    font-size: 24px; /* Logo font size */
+.navbar-custom .nav-link {
+    color: #fff; /* White text */
+    margin: 0 15px; /* Add margin between links */
 }
 
-.nav-links {
-    list-style: none; /* Remove default list styles */
-    display: flex; /* Horizontal layout */
-    margin: 0; /* Remove margin */
-    padding: 0; /* Remove padding */
+.navbar-custom .nav-link:hover {
+    color: #f0e68c; /* Creamy hover effect */
 }
 
-.nav-links li {
-    margin: 0 15px; /* Spacing between links */
+.navbar-custom .navbar-brand {
+    color: #f0e68c; /* Cream color for brand name */
 }
 
-.nav-links a,
-.logout-button {
-    color: white; /* White text color */
-    text-decoration: none; /* Remove underline from links */
-    font-size: 16px; /* Link font size */
-    transition: color 0.3s; /* Smooth color transition */
+.navbar-custom .navbar-brand:hover {
+    color: #fff; /* White on hover */
 }
 
-.nav-links a:hover,
-.logout-button:hover {
-    color: #f9d14e; /* Highlight color on hover */
-}
-
-.logout-button {
-    background: none; /* Remove background */
+.navbar-custom .dropdown-menu {
+    background-color: #6f4c3e; /* Cocoa brown */
     border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
+}
+
+.navbar-custom .dropdown-item {
+    color: #f0e68c; /* Creamy color for dropdown items */
+}
+
+.navbar-custom .dropdown-item:hover {
+    background-color: #5a3e2e; /* Darker cocoa on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar-custom .navbar-toggler {
+    border-color: #f0e68c; /* Cream color for hamburger menu */
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(240, 230, 140, 1)' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(240, 230, 140, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for hamburger icon */
 }

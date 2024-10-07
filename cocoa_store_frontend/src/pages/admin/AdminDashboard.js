@@ -13,9 +13,6 @@ const AdminDashboard = () => {
                     <li><Link to="/admin-dashboard/users">User Management</Link></li>
                     <li><Link to="/admin-dashboard/products">Product Management</Link></li>
                     <li><Link to="/admin-dashboard/orders">Order Management</Link></li>
-                    <li><Link to="/admin-dashboard/inventory">Inventory Management</Link></li>
-                    <li><Link to="/admin-dashboard/reports">Reports</Link></li>
-                    <li><Link to="/admin-dashboard/settings">Settings</Link></li>
                 </ul>
             </nav>
             <div className="admin-content">

@@ -1,62 +1,63 @@
-/* src/styles/CartPage.css */
+/* CartPage.css */
 
 .cart-page {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Light background color */
+    color: #333; /* Dark text color for better readability */
+    max-width: 800px; /* Limit max width for better layout */
+    margin: auto; /* Center the content */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.cart-items-list {
-    list-style: none;
-    padding: 0;
+.cart-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
 }
 
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between item details and remove button */
+    padding: 15px;
+    border-bottom: 1px solid #ddd; /* Separator line between items */
 }
 
 .item-details {
-    display: flex;
-    align-items: center;
+    display: flex; /* Use flexbox for item details */
 }
 
 .item-image {
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
+    width: 100px; /* Fixed width for images */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Space between image and text */
 }
 
 .item-info {
-    flex-grow: 1;
+    flex-grow: 1; /* Allow info to take available space */
 }
 
-.remove-button,
-.clear-cart-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+.remove-button {
+    background-color: #d9534f; /* Red button color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners for the button */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.remove-button:hover,
-.clear-cart-button:hover {
-    background-color: #c0392b;
+.remove-button:hover {
+    background-color: #c9302c; /* Darker red on hover */
 }
 
-.total-price {
-    font-size: 1.5rem;
-    margin-top: 20px;
+.cart-summary {
+    margin-top: 20px; /* Space above summary */
+    font-size: 1.2em; /* Slightly larger text for summary */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
+.error-message {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center the error message */
+    margin-top: 20px; /* Spacing above the error message */
 }

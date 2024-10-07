@@ -1,35 +1,38 @@
+/* Products.css */
+
 .products {
     padding: 20px;
+    background-color: #f9f9f9; /* Light background color for the page */
+    color: #333; /* Dark text color for better readability */
 }
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Space between items */
 }
 
 .product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
+    border: 1px solid #ddd; /* Light border for the cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Inner spacing */
+    background-color: #fff; /* White background for the cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
 }
 
-.add-to-cart {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.add-to-cart:hover {
-    background-color: #218838;
+.error-message {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center the error message */
+    margin-top: 20px; /* Spacing above the error message */
 }

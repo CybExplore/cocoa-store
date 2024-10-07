@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import LoadingSpinner from '../components/LoadingSpinner';
 import '../styles/Home.css'; // Import your styles
 
 const Home = () => {
+    const [loading, setLoading] = useState(true); // State to track loading
+
+    // Simulate a data fetch for demonstration
+    useEffect(() => {
+        const fetchData = async () => {
+            // Simulating network request with a timeout
+            setTimeout(() => {
+                setLoading(false); // Set loading to false after data fetch is complete
+            }, 2000); // Adjust time as needed
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <LoadingSpinner />;
+    }
+
     return (
         <div className="home">
             <h1>Welcome to Cocoa Store</h1>

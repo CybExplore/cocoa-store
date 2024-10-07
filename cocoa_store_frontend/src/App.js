@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import AppNavbar from './components/AppNavbar';
 import Checkout from './pages/Checkout';
 import Home from './pages/Home';
 import CartPage from './pages/CartPage';
@@ -16,6 +16,7 @@ import OrderManagement from './components/OrderManagement';
 import ProductDetails from './pages/ProductDetails';
 import { fetchUserData, isAuthenticated } from './services/authService'; // Import user authentication service
 import { getCart } from './services/cartService'; // Import cart service
+// import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -49,7 +50,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar user={user} cartCount={cartCount} />
+        <AppNavbar  />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />

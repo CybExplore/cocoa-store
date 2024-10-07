@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getCart } from '../services/cartService'; // Fetch cart items
 import { createOrder } from '../services/orderService'; // Create a new order
 import { getToken } from '../services/authService'; // Get the authentication token
+import LoadingSpinner from '../components/LoadingSpinner'; // Import the loading spinner
+import '../styles/Checkout.css'; // Import CSS for styling
 
 const Checkout = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -14,6 +16,8 @@ const Checkout = () => {
         status: 'Pending',
     });
     const [orderSuccess, setOrderSuccess] = useState(false);
+    const [loading, setLoading] = useState(false); // Track loading state
+    const [error, setError] = useState(''); // Track error message
 
     // Fetch cart items on component mount
     useEffect(() => {
@@ -28,10 +32,11 @@ const Checkout = () => {
                 if (items.length > 0) {
                     const total = items[0].items.reduce((acc, item) => acc + item.get_total_price, 0);
                     console.log("Calculated total price:", total); // Log total price
-                    setOrderDetails({ ...orderDetails, total });
+                    setOrderDetails(prev => ({ ...prev, total })); // Update the total in orderDetails
                 }
             } catch (error) {
                 console.error('Error fetching cart items:', error);
+                setError('Failed to load cart items.'); // Set error message
             }
         };
 
@@ -41,6 +46,8 @@ const Checkout = () => {
     // Handle order creation
     const handleCheckout = async (e) => {
         e.preventDefault();
+        setLoading(true); // Start loading
+
         try {
             const token = getToken(); // Get the authentication token
             console.log("Using token for order creation:", token); // Log token usage
@@ -53,27 +60,31 @@ const Checkout = () => {
                 })),
             };
             console.log("Order data to be sent:", orderData); // Log order data
+            
             await createOrder(orderData, token); // Create the order using the token
             console.log("Order created successfully!"); // Log success
             setOrderSuccess(true); // Update order success state
         } catch (error) {
             console.error('Error creating order:', error); // Log error
+            setError('Failed to create order. Please try again.'); // Set error message
+        } finally {
+            setLoading(false); // End loading
         }
     };
 
     return (
-        <div>
+        <div className="checkout-page">
             <h1>Checkout</h1>
 
             {orderSuccess ? (
-                <div>
+                <div className="order-success">
                     <h2>Order Placed Successfully!</h2>
                     <p>Thank you for your purchase.</p>
                 </div>
             ) : (
-                <form onSubmit={handleCheckout}>
+                <form onSubmit={handleCheckout} className="checkout-form">
                     <h2>Order Summary</h2>
-                    <ul>
+                    <ul className="order-summary">
                         {cartItems.length > 0 && cartItems[0].items.map(item => (
                             <li key={item.id}>
                                 {item.product.name} - ${item.product.price} x {item.quantity}
@@ -97,7 +108,10 @@ const Checkout = () => {
                         placeholder="Customer Email"
                         required
                     />
-                    <button type="submit">Place Order</button>
+                    <button type="submit" disabled={loading}>Place Order</button>
+
+                    {loading && <LoadingSpinner />} {/* Show loading spinner while processing */}
+                    {error && <div className="error-message">{error}</div>} {/* Display error message if exists */}
                 </form>
             )}
         </div>

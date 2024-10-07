@@ -1,55 +1,39 @@
-/* src/styles/ProductDetails.css */
+/* ProductDetails.css */
 
 .product-details {
-    max-width: 600px;
-    margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #f9f9f9; /* Light background color for the details page */
+    color: #333; /* Dark text color for better readability */
+    max-width: 600px; /* Limit max width for better readability */
+    margin: auto; /* Center the content */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.product-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+.product-info {
+    text-align: center; /* Center align text */
 }
 
-.product-description {
-    font-size: 1rem;
-    margin: 10px 0;
-}
-
-.product-price {
-    font-size: 1.2rem;
-    color: #333;
-    font-weight: bold;
-}
-
-.product-stock {
-    font-size: 1rem;
-    color: #666;
-}
-
-.quantity-selector {
-    margin: 15px 0;
-}
-
-.quantity-selector label {
-    margin-right: 10px;
+.description {
+    margin: 15px 0; /* Space above and below the description */
 }
 
 .add-to-cart-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #5cb85c; /* Green button color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners for the button */
+    padding: 10px 20px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 .add-to-cart-button:hover {
-    background-color: #218838;
+    background-color: #4cae4c; /* Darker green on hover */
+}
+
+.error-message {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center the error message */
+    margin-top: 20px; /* Spacing above the error message */
 }

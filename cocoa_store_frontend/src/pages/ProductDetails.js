@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../services/cartService'; // Import the addToCart service
 import axios from 'axios';
+import LoadingSpinner from '../components/LoadingSpinner'; // Import the LoadingSpinner
 import '../styles/ProductDetails.css'; // Import your styles
 
 const ProductDetails = () => {
     const { slug } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true); // Track loading state
+    const [error, setError] = useState(null); // Track error state
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -16,6 +18,7 @@ const ProductDetails = () => {
                 setProduct(response.data);
             } catch (error) {
                 console.error('Error fetching product details:', error);
+                setError('Failed to load product details. Please try again later.'); // Set error message
             } finally {
                 setLoading(false); // Set loading to false after fetch
             }
@@ -43,14 +46,16 @@ const ProductDetails = () => {
     return (
         <div className="product-details">
             {loading ? ( // Display loading state
-                <p>Loading...</p>
+                <LoadingSpinner />
+            ) : error ? ( // Display error message
+                <div className="error-message">{error}</div>
             ) : (
                 product ? ( // Display product details if available
-                    <div>
+                    <div className="product-info">
                         <h1>{product.name}</h1>
-                        <p>{product.description}</p>
+                        <p className="description">{product.description}</p>
                         <h3>Price: ${product.price}</h3>
-                        <button onClick={handleAddToCart}>Add to Cart</button>
+                        <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                     </div>
                 ) : (
                     <p>Product not found.</p>

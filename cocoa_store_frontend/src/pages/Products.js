@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getProducts } from '../services/productService';
 import '../styles/Products.css'; // Import your CSS styles for better design
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner'; // Import the LoadingSpinner
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -27,12 +28,12 @@ const Products = () => {
 
     // Render loading state
     if (loading) {
-        return <div>Loading products...</div>;
+        return <LoadingSpinner />; // Use the loading spinner component
     }
 
     // Render error state
     if (error) {
-        return <div>{error}</div>;
+        return <div className="error-message">{error}</div>;
     }
 
     return (

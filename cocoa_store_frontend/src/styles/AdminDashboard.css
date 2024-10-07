@@ -2,50 +2,72 @@
 
 .admin-dashboard {
     display: flex;
-    height: 100vh; /* Full height */
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background color for the dashboard */
+    font-family: 'Arial', sans-serif; /* Use a readable font */
 }
 
 .admin-nav {
-    width: 250px; /* Sidebar width */
-    background-color: #2c3e50; /* Darker background */
-    color: white;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #343a40; /* Dark background for the navigation */
+    color: white; /* White text color */
+    padding: 20px; /* Add some padding */
 }
 
 .admin-nav h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 24px; /* Increase font size for the heading */
+    margin-bottom: 20px; /* Add space below the heading */
 }
 
 .admin-nav ul {
-    list-style: none;
-    padding: 0;
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
 }
 
 .admin-nav li {
-    margin: 15px 0;
+    margin: 15px 0; /* Space between the list items */
 }
 
 .admin-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
+    color: white; /* White link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 18px; /* Font size for the links */
+    transition: color 0.3s; /* Smooth transition for hover effect */
 }
 
 .admin-nav a:hover {
-    text-decoration: underline; /* Underline on hover */
+    color: #17a2b8; /* Change color on hover */
 }
 
 .admin-content {
-    flex: 1; /* Fill the remaining space */
-    padding: 20px; /* Add padding for content */
-    background-color: #ecf0f1; /* Lighter background for content area */
-    overflow-y: auto; /* Scrollable content area */
+    flex-grow: 1; /* Make the content area expand */
+    padding: 20px; /* Add padding around the content */
+    background-color: #fff; /* White background for the content area */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 5px; /* Rounded corners */
 }
 
-.admin-content h1 {
-    margin: 0 0 20px 0; /* Margin below the heading */
-    font-size: 28px;
-    color: #2c3e50; /* Dark text color */
+.admin-content h2 {
+    font-size: 28px; /* Heading size for content */
+    margin-bottom: 20px; /* Space below heading */
+}
+@media (max-width: 768px) {
+    .admin-dashboard {
+        flex-direction: column; /* Stack nav and content vertically */
+    }
+
+    .admin-nav {
+        width: 100%; /* Full width for mobile */
+        text-align: center; /* Center the text */
+    }
+
+    .admin-nav ul {
+        display: flex; /* Flexbox for horizontal layout */
+        justify-content: center; /* Center items */
+        flex-wrap: wrap; /* Allow wrapping */
+    }
+
+    .admin-nav li {
+        margin: 10px; /* Adjust margin for smaller screens */
+    }
 }

@@ -48,7 +48,6 @@ export const loginUser = async (credentials) => {
     }
 };
 
-
 // Register function
 export const registerUser = async (userData) => {
     console.log('Attempting to register with user data:', userData);
@@ -96,6 +95,28 @@ export const fetchUserData = async () => {
     }
 };
 
+// Update user profile function
+export const updateUserProfile = async (userData) => {
+    const token = getToken();
+    if (!token) {
+        throw new Error('No token found');
+    }
+
+    console.log('Updating user profile with data:', userData);
+    try {
+        const response = await axios.put(`${BASE_URL}/user/`, userData, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
+        console.log('User profile updated successfully:', response.data);
+        return response.data; // Return the updated user data
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        throw new Error(error.response?.data?.detail || 'Failed to update user profile');
+    }
+};
+
 // Logout function: clears token and logs the user out
 export const logoutUser = () => {
     console.log('Logging out user');
@@ -130,6 +151,7 @@ export default {
     loginUser,
     registerUser,
     fetchUserData,
+    updateUserProfile, // Export the new function
     logoutUser,
     isAuthenticated,
     resetPassword,
