@@ -1,0 +1,48 @@
+/* src/components/OrderManagement.css */
+
+.order-management {
+    padding: 20px;
+  }
+  
+  .order-form {
+    margin-bottom: 20px;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-table th, .order-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .btn-submit, .btn-edit, .btn-delete {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-submit {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-edit {
+    background-color: #ffc107;
+  }
+  
+  .btn-delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .loading {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  

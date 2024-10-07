@@ -1,0 +1,86 @@
+/* Login.css */
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+    background-color: #ffffff; /* Add a background color */
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    margin-bottom: 15px;
+    position: relative; /* Position for absolute error message */
+}
+
+input {
+    width: 94%;
+    padding: 10px; /* Add padding for comfort */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s; /* Transition for border color */
+    font-size: 16px; /* Increase font size */
+}
+
+input:focus {
+    border-color: #4CAF50; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    position: absolute; /* Positioning for the error message */
+    bottom: -18px; /* Adjusts the error message position */
+    left: 0;
+}
+
+.login-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px; /* Increase font size */
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.register-link {
+    margin-left: 5px;
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
